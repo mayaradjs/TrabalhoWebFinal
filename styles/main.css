@@ -1,0 +1,12 @@
+body{
+  background-color: rgb(230, 230, 230);
+}
+
+.filtros{
+  
+}
+
+.graph{
+  max-height: 300px;
+  max-width: 300px;
+}
