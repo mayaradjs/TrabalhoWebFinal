@@ -6,15 +6,50 @@
   <title>Sistemas Web</title>
   <script src="scripts/jquery-3.3.1.min.js" charset="utf-8"></script>
   <script src="scripts/chart-2.7.3.min.js" charset="utf-8"></script>
+  <!--<script src="scripts/jquery-ui.min.js" charset="utf-8"></script>-->
   <link rel="stylesheet" href="styles/main.css">
+  <!--<link rel="stylesheet" href="styles/jquery-ui.min.css">-->
 </head>
 
 <body>
   <h1>Web Política</h1>
-  <h2>Ajudando você a saber sobre as propostas da Câmara de Deputados</h2>
+  <h2>Ajudando você a saber sobre as proposições da Câmara de Deputados</h2>
   <div class="filtros">
-
+    <div class="datas">
+      <label for="txtDataInicio">Data inicio: </label>
+      <input class="input-form" tabindex="1" type="date" name="txtDataInicio" id="txtDataInicio" title="Teste">
+      <label for="txtDataFim">Data fim: </label>
+      <input class="input-form" tabindex="2" type="date" name="txtDataFim" id="txtDataFim">
+    </div>
+    <label for="txtAno">Ano: </label>
+    <input class="input-form" tabindex="3" type="number" name="txtAno" id="txtAno">
+    </br>
+    <label for="txtNumeroProposicao">Número da proposição: </label>
+    <input class="input-form" tabindex="4" type="number" name="txtNumeroProposicao" id="txtNumeroProposicao">
+    </br>
+    <label for="txtAutor">Autor: </label>
+    <input class="input-form" tabindex="5" type="text" name="txtAutor" id="txtAutor">
+    </br>
+    <label for="txtPartido">Sigla do partido: </label>
+    <input class="input-form" tabindex="6" type="text" name="txtPartido" id="txtPartido">
+    </br>
+    <label for="ddwOrdenacao">Ordenar por: </label>
+    <select class="select-form" tabindex="7" class="dropdown" name="ddwOrdenacao" id="ddwOrdenacao">
+      <option value="id">Nenhum</option>
+      <option value="ano">Ano da apresentação</option>
+      <option value="numero">Número da proposição</option>
+    </select>
+    <br />
+    <label for="ddwOrdem">Ordem: </label>
+    <select class="select-form" tabindex="8" class="dropdown" name="ddwOrdem" id="ddwOrdem">
+      <option value="ASC">Ascendente</option>
+      <option value="DESC">Descendente</option>
+    </select>
+    </br>
+    <button tabindex="9" type="button" name="buscar" onclick="buscar()" class="btn">Buscar</button>
   </div>
+
+
   <div class="graph">
     <canvas id="myChart" width="400" height="400"></canvas>
   </div>

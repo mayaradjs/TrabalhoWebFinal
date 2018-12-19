@@ -1,6 +1,65 @@
+const keyEnter = 13;
+const urlApi = "https://dadosabertos.camara.leg.br/api/v2/proposicoes/";
 //https://dadosabertos.camara.leg.br/swagger/api.html
-//https://dadosabertos.camara.leg.br/api/v2/
+//exemplo: https://dadosabertos.camara.leg.br/api/v2/proposicoes?id=56567657676&ordem=ASC&ordenarPor=id
+/*$(function() {
+  $(document).tooltip();
+});
+*/
 
+// Busca quando aperta Enter
+$(document).ready(function() {
+  $('input, select').keyup(function(event) {
+    if (event.keyCode == keyEnter)
+      buscar();
+  });
+});
+//Buscar proposições de acordo com os filtros selecionados
+function buscar() {
+  var parametros = "?"
+  var dtInicio = $('#txtDataInicio').val();
+  var dtFim = $('#txtDataFim').val();
+  var ano = $('#txtAno').val();
+  var numProposicao = $('#txtNumeroProposicao').val();
+  var autor = $('#txtAutor').val();
+  var partido = $('#txtPartido').val();
+  var ordenacao = $('#ddwOrdenacao').val();
+  var ordem = $('#ddwOrdem').val();
+  if (dtInicio != "")
+    parametros += "dataApresentacaoInicio=" + dtInicio + "&";
+  if (dtFim != "")
+    parametros += "dataApresentacaoFim=" + dtFim + "&";
+
+  //Para remover o ultimo character da string, normalmente o & ou ?
+  parametros = parametros.slice(0, parametros.length - 1);
+
+  $.ajax({
+      url: urlApi + 'movies.html',
+      type: 'GET',
+      dataType: 'XML'
+    })
+    .done(function(result) {
+      console.log(result);
+      var $html = new DOMParser().parseFromString(result, "text/html");
+      var filme = RetornarFilme($html, ano, ator, categoria, outrasinf);
+      if (filme) {
+        trocarContexto("filme");
+        ExibirFilme(filme);
+      } else {
+        $("#modal-loading").hide();
+        alert("Nenhum filme foi encontrado");
+      }
+    })
+    .fail(function(result) {
+      trocarContexto("principal");
+      alert("Algo não ocorreu como deveria.");
+    })
+    .always(function() {
+      $("#modal-loading").hide();
+      console.debug("Request Complete");
+    });
+
+}
 
 //Exemplo de gráfico abaixo (pode remover)
 var ctx = document.getElementById("myChart").getContext('2d');
