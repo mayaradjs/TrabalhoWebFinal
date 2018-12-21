@@ -43,3 +43,8 @@ body{
                 50% 50%
                 no-repeat;
 }
+
+.graficos{
+  max-width: 300px;
+  max-height: 300px;
+}

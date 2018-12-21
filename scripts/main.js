@@ -1,14 +1,16 @@
 const keyEnter = 13;
 const urlApi = "https://dadosabertos.camara.leg.br/api/v2/proposicoes/";
+
 //https://dadosabertos.camara.leg.br/swagger/api.html
 //exemplo: https://dadosabertos.camara.leg.br/api/v2/proposicoes?id=56567657676&ordem=ASC&ordenarPor=id
 /*$(function() {
   $(document).tooltip();
 });
 */
-
 // Busca quando aperta Enter
 $(document).ready(function() {
+  $("#proposicoes").hide();
+
   $('input, select').keyup(function(event) {
     if (event.keyCode == keyEnter)
       buscar();
@@ -90,6 +92,7 @@ function buscar() {
 }
 
 function renderProposicoes(props) {
+  $("#proposicoes").show();
   var body = document.getElementById('resultados');
   limpaPropoosicoes(body);
   var tbl = document.createElement('table');
@@ -106,8 +109,69 @@ function renderProposicoes(props) {
   }
   tbl.appendChild(tbdy);
   body.appendChild(tbl);
+  rederGraficos(body,props);
 }
 
-function limpaPropoosicoes(jqueryObject) {
-  jqueryObject.innerHTML = "";
+function rederGraficos($jqueryObject, dados) {
+  graficoPorAno(dados);
+}
+
+function graficoPorAno(dados) {
+  var ctx = document.getElementById("porAno").getContext('2d');
+  var ChartPorAno = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [{
+        label: '# de Proposições',
+        data: [],
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255,99,132,1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+
+  var counts = {};
+
+  for (var i = 0; i < dados.length; i++) {
+    var num = dados[i].ano;
+    counts[num] = counts[num] ? counts[num] + 1 : 1;
+  }
+
+  var data = ChartPorAno.config.data;
+  for (var key in counts) {
+      if (counts.hasOwnProperty(key)) {
+        data.labels.push(key);
+          data.datasets[0].data.push(counts[key]);
+      }
+  }
+  ChartPorAno.update();
+}
+
+function limpaPropoosicoes($jqueryObject) {
+  $jqueryObject.innerHTML = "";
 }
