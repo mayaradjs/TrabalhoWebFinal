@@ -57,6 +57,7 @@ $(document).ready(function() {
       })
       .always(function() {
         renderProposicao(proposicao);
+        document.getElementById('google-search').src += proposicao.siglaTipo+ "+" + proposicao.numero+"%2F"+proposicao.ano;
         $("#modal-loading").hide();
         console.log(proposicao);
         console.debug("Request Complete");

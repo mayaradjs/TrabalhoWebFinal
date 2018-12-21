@@ -80,8 +80,16 @@ table td:hover
   max-width: 300px;
   max-height: 300px;
   margin: 0 auto 0;
+  padding: 10px;
 }
 
 #conteudo{
   text-align: left;
+}
+
+.google-search{
+  border: none;
+  width: 100%;
+  height: 400px;
+  box-shadow: 0 0 0 0.1rem rgba(195, 195, 195, 0.25);
 }

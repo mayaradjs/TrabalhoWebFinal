@@ -137,6 +137,10 @@ function graficoPorAno(dados) {
       }]
     },
     options: {
+      title: {
+          display: true,
+          text: 'Número de Proposições X Ano das Proposições'
+      },
       scales: {
         yAxes: [{
           ticks: {
@@ -179,6 +183,10 @@ function graficoPorSigla(dados) {
       }]
     },
     options: {
+      title: {
+          display: true,
+          text: 'Número de Proposições X Tipo das Proposições'
+      },
       scales: {
         yAxes: [{
           ticks: {
@@ -204,6 +212,12 @@ function graficoPorSigla(dados) {
       }
   }
   CharPorSigla.update();
+}
+
+function limparFiltros() {
+  $('#filtros input').val('');
+  $("#ddwOrdenacao").val($("#ddwOrdenacao option:first").val());
+  $("#ddwOrdem").val($("#ddwOrdem option:first").val());
 }
 
 function limpaPropoosicoes($jqueryObject) {

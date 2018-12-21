@@ -17,7 +17,7 @@
     <h1>Web Política</h1>
     <h2>Ajudando você a saber sobre as proposições da Câmara de Deputados</h2>
     <div id="conteudo">
-      <div class="filtros">  
+      <div id="filtros" class="filtros">  
         <div class="datas">
           <label for="txtDataInicio">Data inicio: </label>
           <input class="input-form" tabindex="1" type="date" name="txtDataInicio" id="txtDataInicio">
@@ -56,6 +56,7 @@
         </select>
         </br>
         <button tabindex="9" type="button" name="buscar" onclick="buscar()" class="btn">Buscar</button>
+        <button tabindex="10" type="button" name="limpar" onclick="limparFiltros()" class="btn">Limpar</button>
       </div>
       <div id="proposicoes" class="proposicoes">
         <h2>Resultado da busca:</h2>
