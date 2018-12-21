@@ -137,6 +137,10 @@ function graficoPorAno(dados) {
       }]
     },
     options: {
+      title: {
+          display: true,
+          text: 'Número de Proposições X Ano das Proposições'
+      },
       scales: {
         yAxes: [{
           ticks: {
@@ -179,6 +183,10 @@ function graficoPorSigla(dados) {
       }]
     },
     options: {
+      title: {
+          display: true,
+          text: 'Número de Proposições X Tipo das Proposições'
+      },
       scales: {
         yAxes: [{
           ticks: {
