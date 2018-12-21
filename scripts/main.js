@@ -84,8 +84,13 @@ function buscar() {
       alert("Algo não ocorreu como deveria.");
     })
     .always(function() {
-      renderProposicoes(proposicoes);
+      if(proposicoes.length > 0)
+        renderProposicoes(proposicoes);
       $("#modal-loading").hide();
+
+      if(proposicoes <= 0)
+        alert("Não existe resultado que atenda os filtros selecionados");
+
       console.log(proposicoes);
       console.debug("Request Complete");
     });
