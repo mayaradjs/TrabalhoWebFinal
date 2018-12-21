@@ -15,24 +15,29 @@
 <body>
   <h1>Web Política</h1>
   <h2>Ajudando você a saber sobre as proposições da Câmara de Deputados</h2>
-  <div class="filtros">
+  <div class="filtros">  
     <div class="datas">
       <label for="txtDataInicio">Data inicio: </label>
-      <input class="input-form" tabindex="1" type="date" name="txtDataInicio" id="txtDataInicio" title="Teste">
+      <input class="input-form" tabindex="1" type="date" name="txtDataInicio" id="txtDataInicio" title="Data do início do intervalo de tempo em que tenham sido apresentadas as proposições a serem listadas">
       <label for="txtDataFim">Data fim: </label>
-      <input class="input-form" tabindex="2" type="date" name="txtDataFim" id="txtDataFim">
+      <input class="input-form" tabindex="2" type="date" name="txtDataFim" id="txtDataFim" title="Data do fim do intervalo de tempo em que tenham sido apresentadas as proposições a serem listadas">
+      <b title="Coloque o cursor sobre os campos para mais informações" class="help">?</b>
     </div>
     <label for="txtAno">Ano: </label>
-    <input class="input-form" tabindex="3" type="number" name="txtAno" id="txtAno">
+    <input class="input-form" tabindex="3" type="number" name="txtAno" id="txtAno" title="Ano da apresentação das proposições que serão listadas">
+    <b title="Coloque o cursor sobre os campos para mais informações" class="help">?</b>
     </br>
     <label for="txtNumeroProposicao">Número da proposição: </label>
     <input class="input-form" tabindex="4" type="number" name="txtNumeroProposicao" id="txtNumeroProposicao">
+    <b title="Coloque o cursor sobre os campos para mais informações" class="help">?</b>
     </br>
     <label for="txtAutor">Autor: </label>
-    <input class="input-form" tabindex="5" type="text" name="txtAutor" id="txtAutor">
+    <input class="input-form" tabindex="5" type="text" name="txtAutor" id="txtAutor" title="Nome ou parte do nome do(s) autor(es) das proposições que se deseja obter">
+    <b title="Coloque o cursor sobre os campos para mais informações" class="help">?</b>
     </br>
     <label for="txtPartido">Sigla do partido: </label>
-    <input class="input-form" tabindex="6" type="text" name="txtPartido" id="txtPartido">
+    <input class="input-form" tabindex="6" type="text" name="txtPartido" id="txtPartido" title="Sigla do partido a que pertençam os autores das proposições a serem listadas">
+    <b title="Coloque o cursor sobre os campos para mais informações" class="help">?</b>
     </br>
     <label for="ddwOrdenacao">Ordenar por: </label>
     <select class="select-form" tabindex="7" class="dropdown" name="ddwOrdenacao" id="ddwOrdenacao">
