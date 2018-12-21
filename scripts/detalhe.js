@@ -1,6 +1,6 @@
 const urlParams = new URLSearchParams(window.location.search);
 const myParam = urlParams.get('id');
-const urlApi = "https://dadosabertos.camara.leg.br/api/v2/proposicoes/?id=";
+const urlApi = "https://dadosabertos.camara.leg.br/api/v2/proposicoes/";
 
 
 $(document).ready(function() {
@@ -36,13 +36,13 @@ $(document).ready(function() {
       proposicao.ementa = retorno[0].getElementsByTagName("ementa")[0].innerHTML;
       proposicao.ementaDetalhada = retorno[0].getElementsByTagName("ementaDetalhada")[0].innerHTML;
       proposicao.ano = retorno[0].getElementsByTagName("ano")[0].innerHTML;
-      var uriAutores = retorno[0].getElementsByTagName("uriAutores")[0].innerHTML;
-      proposicao.autores = retornaVetorDeAutores(uriAutores);
       proposicao.descricaoTramitacao = retorno[0].getElementsByTagName("descricaoTramitacao")[0].innerHTML;
       proposicao.descricaoSituacao = retorno[0].getElementsByTagName("descricaoSituacao")[0].innerHTML;
       proposicao.regime = retorno[0].getElementsByTagName("regime")[0].innerHTML;
       proposicao.despacho = retorno[0].getElementsByTagName("despacho")[0].innerHTML;
       proposicao.url = retorno[0].getElementsByTagName("url")[0].innerHTML;
+      var uriAutores = retorno[0].getElementsByTagName("uriAutores")[0].innerHTML;
+      proposicao.autores = retornaVetorDeAutores(uriAutores, proposicao);
 
     })
     .fail(function(result) {
@@ -52,7 +52,7 @@ $(document).ready(function() {
     .always(function() {
       //$("#modal-loading").hide();
       renderProposicao(proposicao);
-      console.log(proposicoes);
+      console.log(proposicao);
       console.debug("Request Complete");
     });
 
@@ -96,32 +96,28 @@ $(document).ready(function() {
 });
 
 function retornaVetorDeAutores(uriAutores) {
+  var result = getAutores(uriAutores);
   autores = [];
-  $.ajax({
-      url: uriAutores,
-      type: 'GET',
-      dataType: 'text',
-      headers: {
-        Accept: "application/xml; charset=utf-8"
-      }
-    })
-    .done(function(result) {
-      console.log(result);
-      var xml = new DOMParser().parseFromString(result, "text/xml");
-      var retorno = xml.getElementsByTagName("autor");
-      for (i = 0; i < retorno.length; i++) {
-        autores.push(retorno[i].getElementsByTagName("nome")[0].innerHTML)
-      }
-    })
-    .fail(function(result) {
-      alert("Algo não ocorreu como deveria.");
-    })
-    .always(function() {
-      console.log(autores);
-      console.debug("Request Complete - Author");
-      return autores;
-    });
+  var xml = new DOMParser().parseFromString(result, "text/xml");
+  var retorno = xml.getElementsByTagName("autor");
+  for (i = 0; i < retorno.length; i++) {
+    autores.push(retorno[i].getElementsByTagName("nome")[0].innerHTML)
+  }
+  return autores;
 }
+
+function getAutores(uriAutores) {
+  return $.ajax({
+    url: uriAutores,
+    type: 'GET',
+    dataType: 'text',
+    headers: {
+      Accept: "application/xml; charset=utf-8"
+    },
+    async: false
+  }).responseText;
+}
+
 
 function renderProposicao(prop) {
 
