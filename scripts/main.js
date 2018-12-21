@@ -29,36 +29,79 @@ function buscar() {
     parametros += "dataApresentacaoInicio=" + dtInicio + "&";
   if (dtFim != "")
     parametros += "dataApresentacaoFim=" + dtFim + "&";
+  if (ano != "")
+    parametros += "ano=" + ano + "&";
+  if (numProposicao != "")
+    parametros += "numero=" + numProposicao + "&";
+  if (autor != "")
+    parametros += "autor=" + autor + "&";
+  if (partido != "")
+    parametros += "siglaPartidoAutor=" + partido + "&";
+
+  parametros += "ordernarPor=" + ordenacao + "&";
+  parametros += "ordem=" + ordem + "&";
 
   //Para remover o ultimo character da string, normalmente o & ou ?
   parametros = parametros.slice(0, parametros.length - 1);
 
+  var proposicoes = [];
+
   $.ajax({
-      url: urlApi + 'movies.html',
+      url: urlApi + parametros,
       type: 'GET',
-      dataType: 'XML'
+      dataType: 'text',
+      headers: {
+        Accept: "application/xml; charset=utf-8"
+      }
     })
     .done(function(result) {
       console.log(result);
-      var $html = new DOMParser().parseFromString(result, "text/html");
-      var filme = RetornarFilme($html, ano, ator, categoria, outrasinf);
-      if (filme) {
-        trocarContexto("filme");
-        ExibirFilme(filme);
-      } else {
-        $("#modal-loading").hide();
-        alert("Nenhum filme foi encontrado");
+      var xml = new DOMParser().parseFromString(result, "text/xml");
+      var retorno = xml.getElementsByTagName("proposicao_");
+      for (i = 0; i < retorno.length; i++) {
+        var proposicao = {
+          id: "",
+          siglaTipo: "",
+          numero: "",
+          ementa: "",
+          ano: "",
+        }
+
+        proposicao.id = retorno[i].getElementsByTagName("id")[0].innerHTML;
+        proposicao.siglaTipo = retorno[i].getElementsByTagName("siglaTipo")[0].innerHTML.trim();
+        proposicao.numero = retorno[i].getElementsByTagName("numero")[0].innerHTML;
+        proposicao.ementa = retorno[i].getElementsByTagName("ementa")[0].innerHTML;
+        proposicao.ano = retorno[i].getElementsByTagName("ano")[0].innerHTML;
+
+        proposicoes.push(proposicao);
       }
     })
     .fail(function(result) {
-      trocarContexto("principal");
+      //trocarContexto("principal");
       alert("Algo não ocorreu como deveria.");
     })
     .always(function() {
-      $("#modal-loading").hide();
+      //$("#modal-loading").hide();
+      renderProposicoes(proposicoes);
+      console.log(proposicoes);
       console.debug("Request Complete");
     });
+}
 
+function renderProposicoes(props) {
+  var body = document.getElementById('resultados');
+  var tbl = document.createElement('table');
+  var tbdy = document.createElement('tbody');
+  for (var i = 0; i < props.length; i++) {
+    var tr = document.createElement('tr');
+    var td = document.createElement('td');
+    td.innerHTML = props[i].ementa;
+    td.appendChild(document.createTextNode('\u0020'))
+    tr.appendChild(td)
+    tbdy.appendChild(tr);
+  }
+  tbl.appendChild(tbdy);
+  body.appendChild(tbl);
 }
 
 //Exemplo de gráfico abaixo (pode remover)
