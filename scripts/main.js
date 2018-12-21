@@ -16,6 +16,7 @@ $(document).ready(function() {
 });
 //Buscar proposições de acordo com os filtros selecionados
 function buscar() {
+  $("#modal-loading").show();
   var parametros = "?"
   var dtInicio = $('#txtDataInicio').val();
   var dtFim = $('#txtDataFim').val();
@@ -81,8 +82,8 @@ function buscar() {
       alert("Algo não ocorreu como deveria.");
     })
     .always(function() {
-      //$("#modal-loading").hide();
       renderProposicoes(proposicoes);
+      $("#modal-loading").hide();
       console.log(proposicoes);
       console.debug("Request Complete");
     });
@@ -90,6 +91,7 @@ function buscar() {
 
 function renderProposicoes(props) {
   var body = document.getElementById('resultados');
+  limpaPropoosicoes(body);
   var tbl = document.createElement('table');
   var tbdy = document.createElement('tbody');
   for (var i = 0; i < props.length; i++) {
@@ -104,4 +106,8 @@ function renderProposicoes(props) {
   }
   tbl.appendChild(tbdy);
   body.appendChild(tbl);
+}
+
+function limpaPropoosicoes(jqueryObject) {
+  jqueryObject.innerHTML = "";
 }
