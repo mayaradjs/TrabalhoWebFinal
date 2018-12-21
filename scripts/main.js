@@ -206,6 +206,12 @@ function graficoPorSigla(dados) {
   CharPorSigla.update();
 }
 
+function limparFiltros() {
+  $('#filtros input').val('');
+  $("#ddwOrdenacao").val($("#ddwOrdenacao option:first").val());
+  $("#ddwOrdem").val($("#ddwOrdem option:first").val());
+}
+
 function limpaPropoosicoes($jqueryObject) {
   $jqueryObject.innerHTML = "";
 }
