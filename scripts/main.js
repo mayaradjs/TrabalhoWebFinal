@@ -114,19 +114,62 @@ function renderProposicoes(props) {
 
 function rederGraficos($jqueryObject, dados) {
   graficoPorAno(dados);
+  graficoPorSigla(dados);
 }
 
 function graficoPorAno(dados) {
   var ctx = document.getElementById("porAno").getContext('2d');
   var ChartPorAno = new Chart(ctx, {
-    type: 'bar',
+    type: 'line',
     data: {
       labels: [],
       datasets: [{
         label: '# de Proposições por ano',
         data: [],
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        backgroundColor: 'rgba(0, 0, 0, 0.0)',
         borderColor: 'rgba(255,99,132,1)',
+        borderWidth: 3
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+
+  //Contar ocorrencias no objeto
+  var counts = {};
+  for (var i = 0; i < dados.length; i++) {
+    var num = dados[i].ano;
+    counts[num] = counts[num] ? counts[num] + 1 : 1;
+  }
+
+  var data = ChartPorAno.config.data;
+  for (var key in counts) {
+      if (counts.hasOwnProperty(key)) {
+        data.labels.push(key);
+          data.datasets[0].data.push(counts[key]);
+      }
+  }
+  ChartPorAno.update();
+}
+
+function graficoPorSigla(dados) {
+  var ctx = document.getElementById("porSigla").getContext('2d');
+  var CharPorSigla = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [],
+      datasets: [{
+        label: '# de Proposições por tipo',
+        data: [],
+        backgroundColor:  'rgba(75, 192, 192, 0.2)',
+        borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1
       }]
     },
@@ -141,21 +184,21 @@ function graficoPorAno(dados) {
     }
   });
 
+  //Contar ocorrencias no objeto
   var counts = {};
-
   for (var i = 0; i < dados.length; i++) {
-    var num = dados[i].ano;
+    var num = dados[i].siglaTipo;
     counts[num] = counts[num] ? counts[num] + 1 : 1;
   }
 
-  var data = ChartPorAno.config.data;
+  var data = CharPorSigla.config.data;
   for (var key in counts) {
       if (counts.hasOwnProperty(key)) {
         data.labels.push(key);
           data.datasets[0].data.push(counts[key]);
       }
   }
-  ChartPorAno.update();
+  CharPorSigla.update();
 }
 
 function limpaPropoosicoes($jqueryObject) {
