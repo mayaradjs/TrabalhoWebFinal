@@ -5,7 +5,7 @@ body{
 #container{
   margin: 0 auto 0;
   text-align: center;
-  max-width: 50%; 
+  max-width: 50%;
 }
 
 .proposicoes{
@@ -13,7 +13,7 @@ body{
 }
 
 table td
-{ 
+{
   padding:8px;
   line-height:20px;
   vertical-align:top;
@@ -80,4 +80,8 @@ table td:hover
   max-width: 300px;
   max-height: 300px;
   margin: 0 auto 0;
+}
+
+#conteudo{
+  text-align: left;
 }

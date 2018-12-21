@@ -4,7 +4,7 @@ const urlApi = "https://dadosabertos.camara.leg.br/api/v2/proposicoes/";
 
 
 $(document).ready(function() {
-  if(myParam != null){
+  if (myParam != null) {
     $("#modal-loading").show();
     var proposicao = {
       siglaTipo: "",
@@ -18,6 +18,7 @@ $(document).ready(function() {
       regime: "",
       despacho: "",
       url: "",
+      dataApresentacao: ""
     }
 
     $.ajax({
@@ -42,6 +43,9 @@ $(document).ready(function() {
         proposicao.regime = retorno[0].getElementsByTagName("regime")[0].innerHTML;
         proposicao.despacho = retorno[0].getElementsByTagName("despacho")[0].innerHTML;
         proposicao.url = retorno[0].getElementsByTagName("url")[0].innerHTML;
+        data = retorno[0].getElementsByTagName("dataApresentacao")[0].innerHTML;
+        data = data.slice(0, data.length - 6);
+        proposicao.dataApresentacao = data;
         var uriAutores = retorno[0].getElementsByTagName("uriAutores")[0].innerHTML;
         proposicao.autores = retornaVetorDeAutores(uriAutores, proposicao);
 
@@ -51,7 +55,7 @@ $(document).ready(function() {
         alert("Algo não ocorreu como deveria.");
         window.location.href = "index.html";
       })
-      .always(function() {      
+      .always(function() {
         renderProposicao(proposicao);
         $("#modal-loading").hide();
         console.log(proposicao);
@@ -95,7 +99,7 @@ $(document).ready(function() {
         }
       }
     });
-  }else{
+  } else {
     alert("Não foi informado a proposição");
     window.location.href = "index.html";
   }
@@ -126,5 +130,16 @@ function getAutores(uriAutores) {
 
 
 function renderProposicao(prop) {
+  $("#tituloProposicao").text(prop.siglaTipo + prop.numero + "/" + prop.ano);
+  $("#ementa").text(prop.ementa);
+  $("#dataApresentacao").text(prop.dataApresentacao);
+  $("#autores").text(prop.autores);
+  var cont = "<b>Tramitação: </b>" + prop.descricaoTramitacao + "<br>" +
+    "<b>Situação: </b>" + prop.descricaoSituacao + "<br>" +
+    "<b>Regime: </b>" + prop.regime + "<br>" +
+    "<b>Despacho: </b>" + prop.despacho + "<br>";
+  document.getElementById("status").innerHTML = cont;
+  $("#ementaDetalhada").text(prop.ementaDetalhada);
+  $('#ementaIntegra').attr('href', prop.url);
 
 }
