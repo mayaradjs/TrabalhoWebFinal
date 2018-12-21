@@ -57,7 +57,7 @@ $(document).ready(function() {
       })
       .always(function() {
         renderProposicao(proposicao);
-        document.getElementById('google-search').src += proposicao.siglaTipo+ "+" + proposicao.numero+"%2F"+proposicao.ano;
+        document.getElementById('google-search').src += proposicao.siglaTipo + "+" + proposicao.numero + "%2F" + proposicao.ano;
         $("#modal-loading").hide();
         console.log(proposicao);
         console.debug("Request Complete");
@@ -129,7 +129,6 @@ function getAutores(uriAutores) {
   }).responseText;
 }
 
-
 function renderProposicao(prop) {
   $("#tituloProposicao").text(prop.siglaTipo + prop.numero + "/" + prop.ano);
   $("#ementa").text(prop.ementa);
@@ -142,5 +141,9 @@ function renderProposicao(prop) {
   document.getElementById("status").innerHTML = cont;
   $("#ementaDetalhada").text(prop.ementaDetalhada);
   $('#ementaIntegra').attr('href', prop.url);
+}
 
+function buscarMais() {
+  $("#google-search").show();
+  $("#buscarMais").hide();
 }

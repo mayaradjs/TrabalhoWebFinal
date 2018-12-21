@@ -84,11 +84,11 @@ function buscar() {
       alert("Algo não ocorreu como deveria.");
     })
     .always(function() {
-      if(proposicoes.length > 0)
+      if (proposicoes.length > 0)
         renderProposicoes(proposicoes);
       $("#modal-loading").hide();
 
-      if(proposicoes <= 0)
+      if (proposicoes <= 0)
         alert("Não existe resultado que atenda os filtros selecionados");
 
       console.log(proposicoes);
@@ -114,10 +114,10 @@ function renderProposicoes(props) {
   }
   tbl.appendChild(tbdy);
   body.appendChild(tbl);
-  rederGraficos(body,props);
+  renderGraficos(body, props);
 }
 
-function rederGraficos($jqueryObject, dados) {
+function renderGraficos($jqueryObject, dados) {
   graficoPorAno(dados);
   graficoPorSigla(dados);
 }
@@ -138,8 +138,8 @@ function graficoPorAno(dados) {
     },
     options: {
       title: {
-          display: true,
-          text: 'Número de Proposições X Ano das Proposições'
+        display: true,
+        text: 'Número de Proposições X Ano das Proposições'
       },
       scales: {
         yAxes: [{
@@ -160,32 +160,32 @@ function graficoPorAno(dados) {
 
   var data = ChartPorAno.config.data;
   for (var key in counts) {
-      if (counts.hasOwnProperty(key)) {
-        data.labels.push(key);
-          data.datasets[0].data.push(counts[key]);
-      }
+    if (counts.hasOwnProperty(key)) {
+      data.labels.push(key);
+      data.datasets[0].data.push(counts[key]);
+    }
   }
   ChartPorAno.update();
 }
 
 function graficoPorSigla(dados) {
   var ctx = document.getElementById("porSigla").getContext('2d');
-  var CharPorSigla = new Chart(ctx, {
+  var ChartPorSigla = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: [],
       datasets: [{
         label: '# de Proposições por tipo',
         data: [],
-        backgroundColor:  'rgba(75, 192, 192, 0.2)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
         borderColor: 'rgba(75, 192, 192, 1)',
         borderWidth: 1
       }]
     },
     options: {
       title: {
-          display: true,
-          text: 'Número de Proposições X Tipo das Proposições'
+        display: true,
+        text: 'Número de Proposições X Tipo das Proposições'
       },
       scales: {
         yAxes: [{
@@ -197,21 +197,21 @@ function graficoPorSigla(dados) {
     }
   });
 
-  //Contar ocorrencias no objeto
+  //Conta quantas vezes determinada sigla aparece nos dados do resultado da busca
   var counts = {};
   for (var i = 0; i < dados.length; i++) {
     var num = dados[i].siglaTipo;
     counts[num] = counts[num] ? counts[num] + 1 : 1;
   }
 
-  var data = CharPorSigla.config.data;
+  var data = ChartPorSigla.config.data;
   for (var key in counts) {
-      if (counts.hasOwnProperty(key)) {
-        data.labels.push(key);
-          data.datasets[0].data.push(counts[key]);
-      }
+    if (counts.hasOwnProperty(key)) {
+      data.labels.push(key);
+      data.datasets[0].data.push(counts[key]);
+    }
   }
-  CharPorSigla.update();
+  ChartPorSigla.update();
 }
 
 function limparFiltros() {
