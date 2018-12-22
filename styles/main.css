@@ -1,11 +1,23 @@
 body{
-  background-color: rgb(230, 230, 230);
+  font-size: 16px;
+  font-family: 'Calibri';
+}
+
+html {
+    background: url("../images/camara.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100%;
 }
 
 #container{
   margin: 0 auto 0;
   text-align: center;
   max-width: 50%;
+  background-color: rgb(230, 230, 230, 0.95);
+  border-radius: 10px;
 }
 
 .proposicoes{
@@ -44,7 +56,6 @@ table td:hover
   box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.25);
 }
 
-
 .fDir{
   float: right;
   margin-right: 6px;
@@ -54,6 +65,26 @@ table td:hover
   margin-left: 6px;
 }
 
+h1{
+  font-family: 'Calibri', serif;
+  font-size: 64px;
+  padding: 4px;
+  height: 20px;
+  color: green;
+  padding-bottom: 0px;
+}
+
+h2{
+  color: #45a133;
+}
+
+h3{
+  color:#09a74e;
+}
+
+#subtit{
+  color: gray;
+}
 .btn {
   padding: 3px 12px;
   font-size: 14px;
@@ -64,11 +95,17 @@ table td:hover
   border: 1px solid transparent;
   border-radius: 4px;
   padding-bottom: 5px;
-  background-color: #b4b1b1;
+  background-color: #a7a0a0;
 }
 
 .button-div{
-  margin-left: 10%;
+    text-align: right;
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.button-mais{
+  text-align: center;
 }
 
 .graph{
@@ -99,6 +136,15 @@ table td:hover
 
 #conteudo{
   text-align: left;
+  margin-left: 10px;
+}
+
+#titPesquisaMais{
+  display: none;
+}
+
+.left{
+  margin-left: 20%;
 }
 
 .google-search{

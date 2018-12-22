@@ -9,34 +9,38 @@
   <script src="scripts/main.js" charset="utf-8"></script>
   <!--<script src="scripts/jquery-ui.min.js" charset="utf-8"></script>-->
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
   <!--<link rel="stylesheet" href="styles/jquery-ui.min.css">-->
 </head>
 
 <body>
   <div id="container">
     <h1>Web Política</h1>
-    <h2>Ajudando você a saber sobre as proposições da Câmara de Deputados</h2>
+    <h3 id='subtit'>Ajudando você a saber sobre as proposições da Câmara de Deputados</h3>
+    <br />
     <div id="conteudo">
-      <div id="filtros" class="filtros">  
+      <div id="filtros" class="filtros">
         <div class="datas">
           <label for="txtDataInicio">Data inicio: </label>
           <input class="input-form" tabindex="1" type="date" name="txtDataInicio" id="txtDataInicio">
           <b title="Data do início do intervalo de tempo em que tenham sido apresentadas as proposições a serem listadas" class="help">?</b>
-          <label for="txtDataFim">Data fim: </label>
+          <label for="txtDataFim" class="left">Data fim: </label>
           <input class="input-form" tabindex="2" type="date" name="txtDataFim" id="txtDataFim">
           <b title="Data do fim do intervalo de tempo em que tenham sido apresentadas as proposições a serem listadas" class="help">?</b>
         </div>
+
         <label for="txtAno">Ano: </label>
         <input class="input-form" tabindex="3" type="number" name="txtAno" id="txtAno">
         <b title="Ano da apresentação das proposições que serão listadas" class="help">?</b>
         </br>
-        <label for="txtNumeroProposicao">Número da proposição: </label>
-        <input class="input-form" tabindex="4" type="number" name="txtNumeroProposicao" id="txtNumeroProposicao">
-        <b title="Número oficialmente atribuídos às proposições segundo o art. 137 do Regimento Interno, como 'PL 1234'" class="help">?</b>
-        </br>
+
         <label for="txtAutor">Autor: </label>
         <input class="input-form" tabindex="5" type="text" name="txtAutor" id="txtAutor">
         <b title="Nome ou parte do nome do(s) autor(es) das proposições que se deseja obter" class="help">?</b>
+        </br>
+        <label for="txtNumeroProposicao">Número da proposição: </label>
+        <input class="input-form" tabindex="4" type="number" name="txtNumeroProposicao" id="txtNumeroProposicao">
+        <b title="Número oficialmente atribuídos às proposições segundo o art. 137 do Regimento Interno, como 'PL 1234'" class="help">?</b>
         </br>
         <label for="txtPartido">Sigla do partido: </label>
         <input class="input-form" tabindex="6" type="text" name="txtPartido" id="txtPartido">
@@ -48,8 +52,7 @@
           <option value="ano">Ano da apresentação</option>
           <option value="numero">Número da proposição</option>
         </select>
-        <br />
-        <label for="ddwOrdem">Ordem: </label>
+        <label for="ddwOrdem" class="left">Ordem: </label>
         <select class="select-form" tabindex="8" class="dropdown" name="ddwOrdem" id="ddwOrdem">
           <option value="ASC">Ascendente</option>
           <option value="DESC">Descendente</option>
@@ -67,7 +70,7 @@
         <h2>Gráficos:</h2>
         <div id="graficos">
           <canvas id="porAno" class="graficos" width="400" height="400"></canvas>
-          <canvas id="porSigla" class="graficos" width="400" height="400"></canvas>      
+          <canvas id="porSigla" class="graficos" width="400" height="400"></canvas>
         </div>
       </div>
     </div>

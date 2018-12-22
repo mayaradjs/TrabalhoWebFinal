@@ -8,15 +8,17 @@
   <script src="scripts/chart-2.7.3.min.js" charset="utf-8"></script>
   <script src="scripts/detalhe.js" charset="utf-8"></script>
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
 
 </head>
 
 <body>
   <div id="container">
     <h1>Web Política</h1>
-    <h2>Ajudando você a saber sobre as proposições da Câmara de Deputados</h2>
+    <h3 id='subtit'>Ajudando você a saber sobre as proposições da Câmara de Deputados</h3>
+    <br />
     <div id="conteudo">
-      <h1 id="tituloProposicao"></h1>
+      <h2 id="tituloProposicao"></h2>
       <div id="ementa">
       </div>
       <h2>Informações:</h2>
@@ -39,11 +41,12 @@
       <a id="ementaIntegra" href="" target="_blank">Veja esta ementa na íntegra</a>
       <br />
       <br />
-      <div class="button-div">
+      <div class="button-mais">
         <button type="button" id="buscarMais" onclick="buscarMais()" class="btn">Pesquisar mais</button>
       </div>
     </div>
     <br />
+    <h2 id="titPesquisaMais">Resultado da Pesquisa:</h2>
     <iframe id="google-search" src="search.html?q=" class="google-search"></iframe>
   </div>
   <div id="modal-loading" class="modal">

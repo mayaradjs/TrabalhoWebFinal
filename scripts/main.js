@@ -3,10 +3,7 @@ const urlApi = "https://dadosabertos.camara.leg.br/api/v2/proposicoes/";
 
 //https://dadosabertos.camara.leg.br/swagger/api.html
 //exemplo: https://dadosabertos.camara.leg.br/api/v2/proposicoes?id=56567657676&ordem=ASC&ordenarPor=id
-/*$(function() {
-  $(document).tooltip();
-});
-*/
+
 // Busca quando aperta Enter
 $(document).ready(function() {
   $("#proposicoes").hide();
@@ -106,7 +103,7 @@ function renderProposicoes(props) {
     var tr = document.createElement('tr');
     var td = document.createElement('td');
     td.innerHTML = "<b><a href='Detalhe.html?id=" + props[i].id + "' target='_blank'>" +
-      props[i].siglaTipo + props[i].numero + "</a></b> (" + props[i].ano + ") <br>" +
+      props[i].siglaTipo + props[i].numero + "/" + props[i].ano + "</a></b> <br>" +
       props[i].ementa + "<br>";
     td.appendChild(document.createTextNode('\u0020'))
     tr.appendChild(td)
